@@ -2,37 +2,61 @@
 
 let str = document.getElementById("myParagraph").textContent;
 
-let findMost=function(str) {
-  let words = str.match(/\w+/g);
-  console.log(words); // [ 'How', 'do', 'you', 'do' ]
 
-  let occurances = {};
+let findMost = function(str) {
+
+  let words = str.match(/\w+/g);
+
+
+  let counts = {};
 
   for (let word of words) {
-    if (occurances[word]) {
-      occurances[word]++;
+    if (counts[word]) {
+
+      counts[word]++;
     } else {
-      occurances[word] = 1;
+      counts[word] = 1;
     }
   }
-	occurances.sort((a, b) => b.score - a.score);
-/*   console.log(occurances); // { How: 1, do: 2, you: 1 } */
+
+
+  let countsSorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  console.log(countsSorted);
 
   let max = 0;
-  let mostRepeatedWord = '';
+  let frequent = '';
+  for (let [word, count] of countsSorted) {
 
-  for (let word of words) {
-    if (occurances[word] > max) {
-      max = occurances[word];
-      mostRepeatedWord = word;
+    if (count > max) {
+      max = count;
+      frequent = word;
     }
   }
 
-  return mostRepeatedWord;
+
+
+  let mostFrequent = countsSorted.slice(0, 5).map(([word]) => word);
+
+
+console.log(mostFrequent);
+
+let highlighted = words.map(word => {
+  if (mostFrequent.includes(word.toLowerCase())) {
+    if (word[0] === word[0].toUpperCase()) {
+
+      return `<mark><u>${word}</u></mark>`;
+    } else {
+      return `<mark>${word}</mark>`;
+    }
+  }  else {
+    return word;
+  }
+  // return word
+});
+
+  document.getElementById("myParagraph").innerHTML = highlighted.join(' ');
 }
 
-/* var find = 'abc'; */
-var re = new RegExp(findMost(str), 'g');
 
-str = str.replace(re, '<span color="red">FREE</span>');
-console.log(findMost(str)); // Result: "do"
+findMost(str);
+

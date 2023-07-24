@@ -1,4 +1,10 @@
 #myTimer {
-    color: red;
+    color: black;
     font-size: 64px;
+}
+
+button{
+    height: 80px;
+    width:40px;
+    border-radius: 20%;
 }
