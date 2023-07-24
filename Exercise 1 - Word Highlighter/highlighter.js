@@ -51,7 +51,7 @@ let highlighted = words.map(word => {
   }  else {
     return word;
   }
-  // return word
+  // return
 });
 
   document.getElementById("myParagraph").innerHTML = highlighted.join(' ');

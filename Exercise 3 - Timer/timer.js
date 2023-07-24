@@ -13,21 +13,16 @@ timeRemaining = 0;
 
 
 function updateTimerDisplay() {
-  timer.textContent = timeRemaining;
+  timer.textContent = timeRemaining + "s";
 }
-
-
 function startTimer() {
 
   startButton.disabled = true;
   addButton.disabled = true;
   subtractButton.disabled = true;
   resetButton.disabled = true;
-
-
   countdownInterval = setInterval(updateCountdown, 1000);
 }
-
 
 function stopTimer() {
  
